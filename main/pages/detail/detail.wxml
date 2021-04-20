@@ -1,0 +1,38 @@
+<!--main/pages/detail/detail.wxml-->
+<view class="container">
+  <view class="table-header">
+    <text>时间</text>
+    <text>金额</text>
+    <text>类型</text>
+  </view>
+  <scroll-view scroll-y="true" class="scroll-view" enable-flex="true" bindscrolltoupper="upper" bindscrolltolower="lower">
+    <block wx:if="{{list.length>0}}">
+      <view class="item" wx:for="{{list}}" wx:key="index">
+        <text>{{item.created_at}}</text>
+        <text>{{item.status == 2 ?item.cost+"（已退款）":item.cost}}</text>
+        <text>{{item.type==1?'存入':'支出'}}</text>
+      </view>
+    </block>
+
+    <view wx:else>
+      <van-empty  description="暂无数据"></van-empty>
+    </view>
+    
+  </scroll-view>
+ 
+  <!-- <recycle-view batch="{{batchSetRecycleData}}" id="recycleId">
+    <recycle-item wx:for="{{1}}" wx:key="id">
+      <block wx:if="{{list.length>0}}">
+        <view class="item" wx:for="{{list}}" wx:key="index">
+          <text>{{item.created_at}}</text>
+          <text>{{item.status == 2 ?item.cost+"（已退款）":item.cost}}</text>
+          <text>{{item.type==1?'存入':'支出'}}</text>
+        </view>
+      </block>
+
+      <view wx:else>
+        <van-empty  description="暂无数据"></van-empty>
+      </view>
+    </recycle-item>
+  </recycle-view> -->
+</view>

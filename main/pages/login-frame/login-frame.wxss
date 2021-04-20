@@ -1,0 +1,44 @@
+/* pages/wxphone/wxphone.wxss */
+button{
+  border:0 !important;
+  background:none !important;
+  padding:0 !important;
+}
+page{
+  background:#fff;
+}
+.toplogo{
+  text-align:center;
+  margin:118rpx 0 260rpx 0;
+}
+.toplogo image{
+  width:184rpx;
+  height:184rpx;
+}
+.loginbomb{
+  border-radius:8rpx;
+  text-align:center;
+}
+.button{
+  font-size:30rpx;
+  border:#4D923A 1px solid !important;
+  width:660rpx;
+  line-height:88rpx;
+  color:#4D923A !important;
+  margin-bottom:30rpx;
+}
+.on{
+  background:#4D923A !important;
+  color:#fff !important;
+}
+.button image{
+  width:50rpx;
+  height:50rpx;
+  margin-right:10rpx;
+  vertical-align:middle;
+}
+text.no-login{
+  font-size:30rpx;
+  padding:30rpx 0;
+  color:#999;
+}

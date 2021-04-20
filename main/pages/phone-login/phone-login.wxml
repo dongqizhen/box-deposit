@@ -1,0 +1,13 @@
+<!--pages/phone-login/phone-login.wxml-->
+<view>
+  <view class="phonenumbermain">
+    <view class="phonemain">
+      <text>手机号码</text><input type="number" bindinput='getPhoneValue' value='{{phone}}' placeholder="请输入手机号码" />
+      <button class='buttoncode' bindtap='getVerificationCode' >{{codename}}</button>
+    </view>
+    <view class="phonemain codemain">
+      <text>验证码</text><input type="number" bindinput='getCodeValue' value='{{code}}' placeholder="请输入6位验证码" />
+    </view>
+  </view>
+  <button class="logout green" bindtap="login">确认登录</button>
+</view>

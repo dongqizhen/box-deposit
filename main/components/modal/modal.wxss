@@ -1,0 +1,87 @@
+/* components/modal/modal.wxss */
+
+.mask{
+ position: absolute;
+ left: 0;
+ right: 0;
+ top: 0;
+ bottom: 0;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ background-color: rgba(0,0,0,0.66);
+ z-index: 9999;
+}
+ 
+.modal-content{
+ display: flex;
+ flex-direction: column;
+ width: 600rpx;
+ height: 552rpx;
+ background-color: rgba(244, 204, 102, 1);
+ border-radius: 10rpx;
+ position: relative;
+ align-items: center;
+}
+.title{
+  font-size: 36rpx;
+  font-family: Helvetica;
+  color: #614C16;
+  height: 80rpx;
+  margin-top: 72rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40rpx;
+}
+
+.content{
+  padding: 0 83rpx;
+  font-size: 26rpx;
+  font-family: Helvetica;
+  color: #614C16;
+  line-height: 31rpx;
+  
+}
+ 
+.modal-btn-wrapper{
+ display: flex;
+ flex-direction: row;
+ /* margin-bottom: 64rpx; */
+  justify-content: center;
+  position: absolute;
+  bottom: 64rpx;
+}
+ 
+.cancel-btn, .confirm-btn{
+ width: 195rpx;
+ height: 110rpx;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ text-align: center;
+ font-size: 32rpx;
+ border-radius: 10rpx;
+ font-size: 34rpx;
+ font-family: Helvetica;
+ color: #F4CC66;
+ 
+ background: #1D1D1D;
+}
+
+.no-cancel,.no-confirm{
+  width: 456rpx;
+}
+ 
+.cancel-btn{
+ /* border-right: 2rpx solid rgba(7,17,27,0.1); */
+  background: #F97157;
+  margin-right: 72rpx;
+  color: #FFFFFF;
+}
+ 
+.main-content{
+ flex: 1;
+ height: 100%;
+ overflow-y: hidden; 
+}

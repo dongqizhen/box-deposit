@@ -1,0 +1,106 @@
+<!--main/pages/me/me.wxml-->
+<wxs src="../../utils/filter.wxs" module="filters"/>
+<view class="container">
+  <view class="header">
+    <view class="avatar-wrapper" bindtap="login">
+      <image class="avatar" src="{{avatarUrl?avatarUrl:'../../images/avatar.png'}}"></image>
+      <text class="word">{{nickName?nickName:'点击登录'}}</text>
+    </view>
+    <view class="balance-wrapper" bindtap="check_detail">
+      <text class="balance">余额</text>
+      <text class="money">¥：{{hasUserInfo?rest:'----'}}</text>
+      <text class="detail">查看明细</text>
+    </view>
+
+  </view>
+ <!--Tab布局-->
+      <view class='title'>
+        <view class="{{0 == currentIndex ? 'title-sel-selected' : 'title-sel'}}" bindtap='titleClick' data-idx='0'>
+          <text>存入未取</text>
+          <hr class="line-style"/>
+        </view>
+        
+        <view class="{{1 == currentIndex ? 'title-sel-selected' : 'title-sel'}}" bindtap='titleClick' data-idx='1'>
+          <text>已完成</text>
+          <hr class="line-style"/>
+        </view>
+      </view>
+ 
+
+  <!-- <scroll-view scroll-y="{{true}}" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}"
+      scroll-top="{{scrollTop}}" enable-flex="true"> -->
+      <!--内容布局-->
+      <swiper class='swiper' bindchange='pagechange' current='{{currentIndex}}'>
+        <swiper-item class='swiper-item'>
+          <scroll-view scroll-y="{{true}}" bindscrolltoupper="upper" bindscrolltolower="lower" 
+          enable-flex="true">
+          <block wx:if="{{firstList.length}}">
+            <view wx:for="{{firstList}}" wx:for-item="item"
+            wx:for-index="index"  
+            class='record-item'
+            wx:key="item">
+              <view class='name'>
+                <span class="phone-wrapper" bindtap="callphone" data-phone="{{item.get_use_user[0].phone}}">
+                  <text class="phone">{{item.get_use_user[0].phone}}</text>
+                  <text class="time">存入时间：{{item.save_stop}}</text>
+                </span>
+                <span>柜子：{{item.get_box_info.get_area_info.name + item.get_box_info.get_area_info.area_name }}</span>
+                <span class="name-wrapper">
+                  <text class="names">姓名：{{item.get_use_user[0].name?item.get_use_user[0].name : "--"}}</text>
+                  <text>单号：{{item.sn ? item.sn :'----'}}</text>
+                </span>
+                <span>备注：{{item.text?item.text:'----'}}</span>
+              </view>
+              <view class="button" data-box_id="{{item.box_id}}"
+              data-box_cell_id="{{item.box_cell_id}}" bindtap="openbox">
+                <!-- <view wx:if="{{index == 0}}">
+                  <span>578865</span>
+                  <text>点击可复制取件码</text>
+                </view> -->
+                <!-- <image wx:elif="{{index == 1}}" src='../../images/open.png'></image> -->
+                <image src='../../images/scan1.png'></image>
+              </view>
+            </view>
+          </block>
+          <van-empty wx:else description="暂无数据" />
+        </scroll-view>
+        </swiper-item>
+        <swiper-item class='swiper-item'>
+          <scroll-view scroll-y="{{true}}" bindscrolltoupper="upper" bindscrolltolower="lower"
+          enhanced="{{true}}"
+          show-scrollbar="{{false}}"
+           enable-flex="true"
+          >
+          <block wx:if="{{secondList.length}}">
+            <view wx:for="{{secondList}}" wx:for-item="item" class='record-item'
+            wx:key="id" wx:item-id="{{id}}">
+              <view class='name'>
+                  <span class="phone-wrapper" bindtap="callphone" data-phone="{{item.get_use_user[0].phone}}">
+                    <text class="phone">{{item.get_use_user[0].phone}}</text>
+                    <text class="time">存入时间：{{item.save_stop}}</text>
+                    
+                  </span>
+                  <span class="time">完成时间：{{item.get_stop}}</span>
+                  <span>柜子：{{item.get_box_info.get_area_info.name + item.get_box_info.get_area_info.area_name }}</span>
+                  <span class="name-wrapper">
+                    <text class="names">姓名：{{item.get_use_user[0].name?item.get_use_user[0].name : "--"}}</text>
+                    <text>单号：{{item.sn ? item.sn :'----'}}</text>
+                  </span>
+                  <span>备注：{{item.text?item.text:'----'}}</span>
+                  <span>取件人：{{item.get_one_action.type==0?"一键取件":item.get_one_action.type==1?"共享取件":item.get_one_action.type==2?"专属":item.get_one_action.type==3?"专属临一":item.get_one_action.type==4?"专属临二":item.get_one_action.type==5?"快递员打开":'密码取件（用户小程序取件 / 自己取出）'}}</span>
+              </view>
+            </view>
+          </block>
+          
+          <van-empty wx:else description="暂无数据" />
+          </scroll-view>
+        </swiper-item>
+      </swiper>
+  <!-- </scroll-view> -->
+  <modal show="{{showModal}}" cancelText="{{modal.cancelText}}" confirmText="{{modal.confirmText}}" bindcancel="cancel" bindconfirm="confirm">
+    <text slot="title">{{modal.title}}</text>
+    <text slot="content">
+      {{modal.content}}
+    </text>
+  </modal>
+</view>

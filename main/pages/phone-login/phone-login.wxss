@@ -1,0 +1,61 @@
+/* pages/phone-login/phone-login.wxss */
+page{
+  background:#ffffff;
+}
+.phonenumbermain{
+  display:inline-block;
+}
+.phonemain{
+  border-bottom:1px solid #dddddd;
+  float:left;
+  width:702rpx;
+  line-height:60rpx;
+  padding:20rpx 0;
+  margin:0 24rpx;
+  display: flex;
+  align-items: center;
+}
+.phonemain text{
+  width:130rpx;
+  font-size:28rpx;
+  float:left;
+}
+.phonemain input{
+  font-size:28rpx;
+  float:left;
+  margin-top:5rpx;
+  padding-left:10rpx;
+}
+.buttoncode,text.buttoncode{
+  width:187rpx !important;
+  height:60rpx !important;
+  min-height:60rpx !important;
+  border-radius:8rpx;
+  color:#787EE1 !important;
+  font-size:26rpx;
+  border:1rpx solid #787EE1 !important;
+  float:right;
+  padding:0 !important;
+  line-height:58rpx;
+  background:#fff !important;
+  text-align:center;
+}
+.button-hover{
+  background:none !important;
+}
+
+.logout {
+  width: 702rpx;
+  height: 88rpx !important;
+  min-height: 88rpx !important;
+  /* line-height:88rpx; */
+  color: #fff;
+  font-size: 34rpx;
+  background: linear-gradient(90deg, rgba(117, 126, 225, 1) 0%, rgba(190, 114, 227, 1) 100%);
+  border-radius: 8px;
+  margin-top: 60rpx;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

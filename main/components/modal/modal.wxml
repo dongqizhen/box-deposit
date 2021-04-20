@@ -1,0 +1,15 @@
+<!--components/modal/modal.wxml-->
+<view class='mask' wx:if='{{show}}' bindtap='clickMask'>
+ <view class='modal-content' animation="{{animationData}}">
+  <view class="title">
+    <slot name="title"></slot>
+  </view>
+  <view class="content">
+    <slot name="content"></slot>
+  </view>
+  <view class='modal-btn-wrapper'>
+   <view wx:if="{{cancelText!=''}}" class='cancel-btn {{confirmText==""?"no-confirm":""}}' bindtap='cancel'>{{cancelText}}</view>
+   <view class='confirm-btn {{cancelText==""?"no-cancel":""}}' wx:if="{{confirmText !=''}}" bindtap='confirm'>{{confirmText}}</view>
+  </view>
+ </view>
+</view>

@@ -1,0 +1,96 @@
+<!--main/pages/save/save.wxml-->
+<view class="container">
+  <view class="header">
+    <text>{{address}}</text>
+    <view>
+      <view wx:for="{{cell}}" wx:key="s_size_id">
+        <text class="title">{{item.get_size_info.name}}</text>
+        <view class="{{curr_index == index ? 'cube' :'cube cube1'}} {{item.num == 0?'disabled':''}}" bindtap="selectBox" data-id="{{item.s_size_id}}"  data-index="{{index}}">
+          <text>可用数量</text>
+          <span>{{item.s_size_id == null ? 0 : item.num}}</span>
+        </view>
+      </view>
+    </view>
+    
+    <!-- <view>
+      <text class="title">中</text>
+      <view class="cube cube1">
+        <text>可用数量</text>
+        <span>0</span>
+      </view>
+    </view>
+    <view>
+      <text class="title">大</text>
+      <view class="cube cube1">
+        <text>可用数量</text>
+        <span>0</span>
+      </view>
+    </view> -->
+  </view>
+  <view class="main">
+    <view class="phone-input">
+      <view>
+        <!-- <input class="phone" type="number" placeholder="请输入收件人手机号" maxlength="11" placeholder-class="placeholder" /> -->
+        <van-field
+          class="phone"
+          model:value="{{ phone }}"
+          type="number"
+          maxlength="11"
+          center
+          clearable
+          placeholder="请输入收件人手机号"
+          border="{{ true }}"
+        >
+        </van-field>
+        <!-- <input class="name" type="text" placeholder="姓名（选填）" placeholder-class="placeholder"/> -->
+        <van-field
+          model:value="{{ name }}"
+          class="name"
+          center
+          clearable
+          placeholder="姓名（选填）"
+          border="{{ true }}"
+        >
+        </van-field>
+      </view>
+      <view class="tip"><text>*</text><text class="tip-word">发送取件密码的唯一凭着，务必正确填写！</text></view>
+    </view>
+    <view class="order-number">
+      <!-- <input class="input" type="text" placeholder="物流单号（选填）" placeholder-class="placeholder"/> -->
+      <van-field
+          class="input"
+          model:value="{{ order_numer }}"
+          center
+          clearable
+          placeholder="物流单号（选填）"
+          border="{{ true }}"
+        >
+        </van-field>
+    </view>
+    <view class="order-remark">
+      <!-- <input class="input" type="text" placeholder="备注（选填）" placeholder-class="placeholder"/> -->
+      <van-field
+          class="input"
+          model:value="{{ order_remark }}"
+          type="textarea"
+          center
+          autosize
+          placeholder="备注（选填）"
+          border="{{ true }}"
+        >
+        </van-field>
+    </view>
+    <button wx:if="{{!nobox}}" class="submit-button"  type="primary" bindtap="open">开箱（准备存入）</button>
+    <button wx:else class="submit-button" disabled="true" type="primary">当前柜暂无空闲格口，可前往其他柜存件。</button>
+
+  </view>
+  
+  <!-- 打开格子口弹框 -->
+  <modal show="{{showModal}}" cancelText="{{modal.cancelText}}" confirmText="{{modal.confirmText}}" bindcancel="cancel" bindconfirm="confirm">
+    <text slot="title">{{modal.title}}</text>
+    <text slot="content">
+      {{modal.content}}
+    </text>
+  </modal>
+
+</view>

@@ -1,0 +1,7 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="scan">
+    <image bindtap="scan" src="../../images/scan.png"></image>
+  </view>
+</view>
+

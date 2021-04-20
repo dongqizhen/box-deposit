@@ -1,0 +1,27 @@
+/**index.wxss**/
+
+page {
+  background: #f6f6f6;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100vh;
+  width: 100vw;
+}
+.container{
+  height:100vh ;
+  width: 100vw;
+}
+.scan{
+  height:100vh ;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scan image{
+  width: 504rpx;
+  height: 504rpx;
+}
+

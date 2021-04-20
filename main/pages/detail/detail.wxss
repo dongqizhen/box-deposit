@@ -1,0 +1,64 @@
+/* main/pages/detail/detail.wxss */
+page{
+  background: #f6f6f6;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100vh;
+    width: 100vw;
+}
+.container{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.table-header{
+  height: 94rpx;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: #f4f4f4;
+}
+.table-header text{
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  font-size: 24rpx;
+  font-family: Helvetica;
+  color: #614C16;
+
+}
+
+recycle-view{
+  flex:1;
+  height: calc(100% - 94rpx);
+}
+
+recycle-view .wrap{
+  height: 100%;
+}
+
+.scroll-view{
+  flex:1;
+  width:100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.scroll-view .item{
+  display: flex;
+  width: 100%;
+  font-size: 20rpx;
+  font-family: Helvetica;
+  color: #6D6D6D;
+  line-height: 24rpx;
+  height: 40rpx;
+}
+
+.scroll-view text{
+  flex:1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
