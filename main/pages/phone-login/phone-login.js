@@ -143,6 +143,7 @@ Page({
       if(code == 0){
         wx.setStorageSync('isLogin', true)
         await app.globalData.getUserInfo()
+        await app.register()
         wx.navigateBack({
           delta: 2,
         })

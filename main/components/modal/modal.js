@@ -42,6 +42,12 @@ Component({
     value:'取消'
    }
   },
+
+  observers:{
+    cancelText(val){
+      console.log(val)
+    }
+  },
   
   /**
    * 组件的初始数据

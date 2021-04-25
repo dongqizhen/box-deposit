@@ -14,7 +14,7 @@ App({
     wx.checkSession({
       success:()=>{
         if (token) {
-          
+         // this.login()
         } else {
           // 登录
           wx.removeStorageSync('isLogin')
@@ -38,7 +38,7 @@ App({
     return new Promise((resolve,reject)=>{
       wx.getSetting({
         success:(res)=>{
-          if (res.authSetting['scope.userInfo']) {
+          //if (res.authSetting['scope.userInfo']) {
             wx.getUserProfile({
               desc: '用于显示用户资料',
               success: (res) => {
@@ -56,7 +56,7 @@ App({
                 resolve()
               }
             })
-          }
+         // }
         },
         fail:()=>{
           reject()
@@ -88,6 +88,17 @@ App({
        wx.setStorageSync('userInfo', res.data)
     })
   },
+
+  //登陆注册用户头像信息
+ async register(){
+  const {encryptedData,iv,rawData,signature} = this.globalData.profile_user
+  await request.post('/kdy/register',{
+    rawData,
+    iv,
+    encryptedData,
+    signature
+  })
+},
 
   login(){
     // 登录

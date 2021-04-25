@@ -59,6 +59,7 @@ Page({
     box_id:'', //柜子的ID
     box_cell_id:'', //格子口的ID
     disabled:true,
+    share_id:'',
     cell:[],
     curr_index:null,
     nobox:false
@@ -77,7 +78,7 @@ Page({
     })
     const {box_id} = options
     this.setData({
-      box_id:box_id
+      box_id
     })
     this.getBoxInfo()
   },
@@ -97,7 +98,7 @@ Page({
       console.log(res)
       let {cell,box:{get_area_info:{name,area_name},town,unit}} = res.data
       this.setData({
-        address:name + area_name + town + "号楼" + unit + "单元"
+        address:name + area_name + town  + unit 
       })
       const _arr = [
         {s_size_id:"1",num:'0',get_size_info:{name:'大箱'}},{s_size_id:"2",num:'0',get_size_info:{name:'中箱'}},{s_size_id:"3",num:'0',get_size_info:{name:'小箱'}}
@@ -139,13 +140,43 @@ Page({
     })
   },
 
+  scanOrder(){
+    wx.scanCode({
+      success:res=>{
+        console.log(res)
+        const {result} = res
+        if(result){
+          this.setData({
+            order_numer:result
+          })
+        }else{
+          showToast('无效物流单号')
+        }
+      }
+    })
+  },
+
   async confirm(){
 
     const {modal} = this.data
     //放弃modal
     if(modal.title == modals.modal2.title){
       this.setData({
-        modal:modals.modal1
+        modal:{
+          title:'格口已打开',
+          cancelText:'',
+          confirmText:'',
+          content:'箱门关闭后3分钟内可放弃取出，超时'
+        }
+      })
+      this.setData({
+        modal:{
+          title:'格口已打开',
+          cancelText:'放弃',
+          confirmText:'我已存入',
+          content:'箱门关闭后3分钟内可放弃取出，超时'
+        }
+        
       })
       return
     }
@@ -170,16 +201,31 @@ Page({
   },
 
   async cancel(){
-    const {modal} = this.data
+    const {modal,share_id} = this.data
     
     if(modal.title == modals.modal1.title){
       this.setData({
-        modal:modals.modal2
+        modal:{
+          title:'放弃本次存件？',
+          cancelText:'',
+          confirmText:'',
+          content:'点击确认放弃将打开箱门。'
+        }
+      })
+      this.setData({
+        modal:{
+          title:'放弃本次存件？',
+          cancelText:'确认放弃',
+          confirmText:'手滑了',
+          content:'点击确认放弃将打开箱门。'
+        }
       })
       return
     }
 
-    await request.post('/kdy/cancelSave')
+    await request.post('/kdy/cancelSave',{
+      share_id
+    })
 
     this.setData({
       modal:modals.modal3
@@ -191,8 +237,10 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
+  async onShow() {
+    if(wx.getStorageSync('isLogin')){
+      await app.getUserInfo()
+    }
   },
 
   /**
@@ -231,13 +279,14 @@ Page({
       size
     }).then(async res=>{
       console.log(res)
-      const {code,mes,box_cell_id} = res.data
+      const {code,mes,box_cell_id,share_id} = res.data
       //打开箱子
       if(code == 0){
         //await showToast('正在发送开箱请求','loading')
         this.setData({
           showModal:true,
-          box_cell_id
+          box_cell_id,
+          share_id
         })
         return true
       }else{

@@ -8,6 +8,20 @@ const request = new Request({
   withBaseURL: true
 })
 
+const showToast = (title,icon='none') =>{
+
+  return new Promise((resolve,reject)=>{
+    wx.showToast({
+      title,
+      icon,
+      success:()=>{
+        resolve()
+      }
+    })
+  })
+  
+}
+
 const modals={
   modal1:{
     title:'确认开箱？',
@@ -68,13 +82,21 @@ Page({
    
     if(wx.getStorageSync('isLogin')){
       await app.getUserInfo()
-      const {get_kdy_user_info:{balance}} = wx.getStorageSync('userInfo')
+      const {get_kdy_user_info} = wx.getStorageSync('userInfo')
       this.setData({
         hasUserInfo:true,
         nickName,
         avatarUrl,
-        rest:balance
       })
+      if(get_kdy_user_info != null){
+        this.setData({
+          rest:get_kdy_user_info.balance
+        })
+      }else{
+        
+        return
+      }
+     
     }
 
     // this.setData({
@@ -105,14 +127,19 @@ Page({
         const {code,mes} = res.data
         if(code == 10102){
           this.setData({
-            showModal:false
+            showModal:false,
+            modal:modals.modal1
           })
           await app.getUserInfo()
-          const {get_kdy_user_info:{balance}} = wx.getStorageSync('userInfo')
-          this.setData({
-            rest:balance
-          })
-          this.getSaveList()
+          const {get_kdy_user_info} = wx.getStorageSync('userInfo')
+          if(get_kdy_user_info != null){
+            this.setData({
+              rest:get_kdy_user_info.balance
+            })
+            this.getSaveList()
+          }else{
+            showToast('请与运营商联系')
+          }
         }else{
           showToast(mes)
         }
@@ -123,6 +150,16 @@ Page({
       //onlyFromCamera: true,
       success:async (res)=>{
         const {path,errMsg} = res
+
+        if(!path){
+          wx.showToast({
+            title: '二维码不匹配',
+            icon:'none',
+            duration:3000
+          })
+          return
+        }
+
         const box_id = path.split('=')[1]
         if(box_id == this.data.box_id){
           const reso = await request.get('/openBoxButton',{
@@ -197,6 +234,17 @@ Page({
   async getSaveList(){
     const {currentPage:page,currentIndex} = this.data
     const type = currentIndex == 0 ? 1 :0
+
+    if(!wx.getStorageSync('isLogin')){
+      return
+    } 
+
+    const {get_kdy_user_info} = wx.getStorageSync('userInfo')
+
+    if(get_kdy_user_info == null ){
+      showToast('请与运营商联系')
+      return
+    }
 
     if(page == 1){
       // this.setData({

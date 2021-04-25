@@ -1,6 +1,6 @@
 /* main/pages/save/save.wxss */
 page{
-  background: #f6f6f6;
+  background: #fff;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -9,6 +9,7 @@ page{
 }
 .container{
   height: 100%;
+  background: #fff;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -89,6 +90,9 @@ page{
 
 .main{
   flex: 1;
+  padding-top: 50rpx;
+  overflow: hidden;
+  padding-left: 1rpx;
 }
 .main .phone-input{
   display: flex;
@@ -103,8 +107,9 @@ page{
   display: flex;
   width: 375rpx;
   height: 79rpx;
-  background: #F6F6F6;
+  background: #f6f6f6 !important;
   border-radius: 5rpx;
+  overflow: hidden;
   border: 1rpx solid #C1C1C1;
   /* padding-left: 19rpx; */
   color: #2E2D2D;
@@ -114,6 +119,9 @@ page{
 }
 .phone van-cell,.name van-cell,.input van-cell{
   width: 100%;
+  border-radius: 5rpx;
+  margin-left: 5rpx;
+  background: #f6f6f6;
 }
 .phone .van-cell,.name .van-cell,.input .van-cell{
   padding: 0;
@@ -131,14 +139,16 @@ page{
 .name{
   width: 218rpx;
   height: 79rpx;
-  background: #F6F6F6;
+  background: #f6f6f6;
   border-radius: 5rpx;
+  overflow: hidden;
   border: 1rpx solid #C1C1C1;
   margin-left: 33rpx;
   /* padding-left: 19rpx; */
   font-family: Helvetica;
   color: #2E2D2D;
   font-size: 28rpx;
+  display: flex;
   box-sizing: border-box;
 }
 .tip{
@@ -172,14 +182,23 @@ page{
 .input{
   width: 624rpx;
   height: 79rpx;
-  background: #F6F6F6;
+  display: flex;
+  background: #f6f6f6;
   border-radius: 5rpx;
+  overflow: hidden;
   border: 1rpx solid #C1C1C1;
   /* padding-left: 19rpx; */
   box-sizing: border-box;
   font-family: Helvetica;
   color: #2E2D2D;
   font-size: 28rpx;
+  align-items: center;
+}
+
+.scan{
+  width: 52rpx;
+  height: 40rpx;
+  display: flex;
 }
 
 .order-remark .input{
@@ -194,6 +213,9 @@ page{
   border-radius: 5rpx;
   box-sizing: border-box !important;
   display: flex;
+  font-size: 26rpx !important;
+  font-family: Helvetica;
+  color: #262626;
   align-items: center;
   justify-content: center;
 }

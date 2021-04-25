@@ -1,6 +1,6 @@
 /* main/pages/detail/detail.wxss */
 page{
-  background: #f6f6f6;
+  background: #fff;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -44,6 +44,7 @@ recycle-view .wrap{
   width:100%;
   display: flex;
   flex-direction: column;
+  padding-top: 20rpx;
 }
 
 .scroll-view .item{
@@ -52,8 +53,8 @@ recycle-view .wrap{
   font-size: 20rpx;
   font-family: Helvetica;
   color: #6D6D6D;
-  line-height: 24rpx;
-  height: 40rpx;
+  line-height: 50rpx;
+  height: 50rpx;
 }
 
 .scroll-view text{

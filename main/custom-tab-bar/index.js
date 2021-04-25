@@ -9,7 +9,7 @@ Component({
 			},
 			{
 				icon: 'friends-o',
-				text: '个人中心',
+				text: '我的',
 				url: '/pages/me/me'
 			}
 		]

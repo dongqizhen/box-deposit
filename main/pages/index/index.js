@@ -21,24 +21,40 @@ Page({
     }
   },
 
-  onShow(){
-    console.log(this.getTabBar())
+  async onShow(){
+    
     this.getTabBar().init();
+    if(wx.getStorageSync('isLogin')){
+      await app.getUserInfo()
+    }
   },
 
   //扫码
   async scan(){
 
     const wx_userInfo = wx.getStorageSync('wx_userInfo')
-    
+
     if(!wx_userInfo){
       await app.globalData.getUserProfile()
     }
 
+    if(wx.getStorageSync('isLogin')){
+      await app.getUserInfo()
+    }
+
     if(!wx.getStorageSync('isLogin')){
-      
       wx.navigateTo({
         url: '../login-frame/login-frame',
+      })
+      return
+    }
+
+    const {get_kdy_user_info} = wx.getStorageSync('userInfo')
+    
+    if(get_kdy_user_info == null){
+      wx.showToast({
+        title: '请与运营商联系',
+        icon:'none'
       })
       return
     }
@@ -54,7 +70,7 @@ Page({
             })
           }else{
             wx.showToast({
-              title: '请扫箱体二维码',
+              title: '二维码不匹配',
               icon:'none',
               duration:3000
             })

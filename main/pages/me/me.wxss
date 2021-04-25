@@ -1,6 +1,6 @@
 /* main/pages/me/me.wxss */
 page{
-  background: #f6f6f6;
+  background: #fff;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -95,7 +95,12 @@ scroll-view{
   height: 88rpx;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  margin-top: 35rpx;
+}
+
+.title>view:first-child{
+  margin-right: 50rpx;
 }
  
 .title-sel {
@@ -111,7 +116,7 @@ scroll-view{
 .title-sel  .line-style{
   background: transparent;
   height: 6rpx;
-  width: 120rpx;
+  width: 173rpx;
   position: relative;
   margin-top: 10rpx;
   border-radius: 3rpx;
@@ -122,13 +127,14 @@ scroll-view{
   font-size: 28rpx;
   /* font-size: 32rpx; */
   display: flex;
+  line-height: 34rpx;
   flex-direction: column;
   align-items: center;
 }
 .title-sel-selected .line-style{
   background: #614C16;
   height: 6rpx;
-  width: 120rpx;
+  width: 173rpx;
   position: relative;
   margin-top: 10rpx;
   border-radius: 3rpx;
@@ -138,42 +144,59 @@ scroll-view{
   width: 100%;
   /* min-height: 101%;
   flex: 1; */
+  height: calc(1005 - 88rpx - 282rpx);
   box-sizing: border-box;
   flex: 1;
+  display: flex;
+  position: relative;
   overflow: scroll;
   /* padding-left: 73rpx; */
 }
 
 .swiper-item{
   width: 100%;
-  
-  /* height: auto !important; */
   box-sizing: border-box;
 }
+
+.second-wrapper{
+  overflow: auto;
+}
+
 .swiper-item:first-child{
   margin-right: 60rpx;
 }
  
 .record-item {
-  margin-top: 10rpx;
+  /* margin-top: 10rpx; */
   /* background-color: white; */
   display: flex;
   padding-top: 10rpx;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   font-size: 30rpx;
-  margin-bottom: 26rpx;
-  border-bottom: 1px solid #D2D2D2;
+  height: auto;
+  box-sizing: border-box;
+  margin-bottom: 5rpx;
+  border-bottom: 1rpx solid #D2D2D2;
+  /* padding-bottom: 10rpx; */
 }
+
+.second{
+  margin:0 60rpx;
+}
+
  
 .name{
   display: flex;
-  justify-content: space-between;
-  
+  /* justify-content: space-between; */
+  width: 100%;
+  flex: 1;
   /* padding: 2vh; */
-  padding-bottom: 10rpx;
+  box-sizing: border-box;
+  padding-top: 16rpx;
   
   flex-direction: column;
+  padding-bottom: 10rpx;
 }
 .names{
   margin-right: 50rpx;
@@ -191,9 +214,12 @@ scroll-view{
   font-size: 20rpx;
   font-family: Helvetica;
   color: #636363;
-  line-height: 28rpx;
-  height: 28rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  margin-bottom: 4rpx;
   display: flex;
+  margin-bottom: 1rpx;
+
 }
 .button{
   align-items: center;

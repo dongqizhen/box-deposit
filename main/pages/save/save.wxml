@@ -35,6 +35,7 @@
           class="phone"
           model:value="{{ phone }}"
           type="number"
+          custom-style="background:#f6f6f6"
           maxlength="11"
           center
           clearable
@@ -47,6 +48,7 @@
           model:value="{{ name }}"
           class="name"
           center
+          custom-style="background:#f6f6f6"
           clearable
           placeholder="姓名（选填）"
           border="{{ true }}"
@@ -61,16 +63,20 @@
           class="input"
           model:value="{{ order_numer }}"
           center
+          custom-style="background:#f6f6f6"
           clearable
           placeholder="物流单号（选填）"
           border="{{ true }}"
         >
+        
+          <image class="scan" bindtap="scanOrder" slot='button' src="../../images/scan2.png"></image>
         </van-field>
     </view>
     <view class="order-remark">
       <!-- <input class="input" type="text" placeholder="备注（选填）" placeholder-class="placeholder"/> -->
       <van-field
           class="input"
+          custom-style="background:#f6f6f6"
           model:value="{{ order_remark }}"
           type="textarea"
           center
@@ -80,7 +86,7 @@
         >
         </van-field>
     </view>
-    <button wx:if="{{!nobox}}" class="submit-button"  type="primary" bindtap="open">开箱（准备存入）</button>
+    <button wx:if="{{!nobox}}" class="submit-button" bindtap="open">开箱（准备存入）</button>
     <button wx:else class="submit-button" disabled="true" type="primary">当前柜暂无空闲格口，可前往其他柜存件。</button>
 
   </view>

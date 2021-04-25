@@ -4,7 +4,6 @@
     "pages/index/index",
     "pages/me/me",
     "pages/detail/detail",
- 
     "pages/save/save",
     "pages/login-frame/login-frame"
   ],
@@ -24,7 +23,7 @@
       },
       {
         "pagePath": "pages/me/me",
-        "text": "个人中心"
+        "text": "我的"
       }
     ],
     "color": "#614C16",

@@ -8,7 +8,7 @@
     </view>
     <view class="balance-wrapper" bindtap="check_detail">
       <text class="balance">余额</text>
-      <text class="money">¥：{{hasUserInfo?rest:'----'}}</text>
+      <text class="money">¥：{{hasUserInfo && rest ?rest:'----'}}</text>
       <text class="detail">查看明细</text>
     </view>
 
@@ -42,7 +42,7 @@
               <view class='name'>
                 <span class="phone-wrapper" bindtap="callphone" data-phone="{{item.get_use_user[0].phone}}">
                   <text class="phone">{{item.get_use_user[0].phone}}</text>
-                  <text class="time">存入时间：{{item.save_stop}}</text>
+                  <text class="time">存入时间：{{item.save_stop || '----'}}</text>
                 </span>
                 <span>柜子：{{item.get_box_info.get_area_info.name + item.get_box_info.get_area_info.area_name }}</span>
                 <span class="name-wrapper">
@@ -65,15 +65,13 @@
           <van-empty wx:else description="暂无数据" />
         </scroll-view>
         </swiper-item>
-        <swiper-item class='swiper-item'>
-          <scroll-view scroll-y="{{true}}" bindscrolltoupper="upper" bindscrolltolower="lower"
-          enhanced="{{true}}"
-          show-scrollbar="{{false}}"
+        <swiper-item class='swiper-item second-wrapper'>
+          <!-- <scroll-view scroll-y="{{true}}" bindscrolltoupper="upper" bindscrolltolower="lower"
            enable-flex="true"
-          >
+          > -->
           <block wx:if="{{secondList.length}}">
-            <view wx:for="{{secondList}}" wx:for-item="item" class='record-item'
-            wx:key="id" wx:item-id="{{id}}">
+            <view wx:for="{{secondList}}" wx:for-item="item" class='record-item second'
+            wx:key="id">
               <view class='name'>
                   <span class="phone-wrapper" bindtap="callphone" data-phone="{{item.get_use_user[0].phone}}">
                     <text class="phone">{{item.get_use_user[0].phone}}</text>
@@ -89,11 +87,12 @@
                   <span>备注：{{item.text?item.text:'----'}}</span>
                   <span>取件人：{{item.get_one_action.type==0?"一键取件":item.get_one_action.type==1?"共享取件":item.get_one_action.type==2?"专属":item.get_one_action.type==3?"专属临一":item.get_one_action.type==4?"专属临二":item.get_one_action.type==5?"快递员打开":'密码取件（用户小程序取件 / 自己取出）'}}</span>
               </view>
+              <view class="button" style="width:90rpx"></view>
             </view>
           </block>
           
           <van-empty wx:else description="暂无数据" />
-          </scroll-view>
+          <!-- </scroll-view> -->
         </swiper-item>
       </swiper>
   <!-- </scroll-view> -->
