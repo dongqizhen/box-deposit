@@ -18,6 +18,18 @@ page {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+}
+
+.scan text{
+  margin-top: 120rpx;
+  width: 100%;
+  display: flex;
+  padding: 0 40rpx;
+  font-size: 30rpx;
+  box-sizing: border-box;
+  text-align: center;
+  color: rgb(234, 14, 14);
 }
 
 .scan image{

@@ -2,6 +2,7 @@
 <view class="container">
   <view class="scan">
     <image bindtap="scan" src="../../images/scan.png"></image>
+    <text>所有操作都在手机端完成！请确认箱门已关闭，并在手机端完成操作流程后再离开或进行下一单投递。</text>
   </view>
 </view>
 

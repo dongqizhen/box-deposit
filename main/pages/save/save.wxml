@@ -11,7 +11,7 @@
         </view>
       </view>
     </view>
-    
+
     <!-- <view>
       <text class="title">中</text>
       <view class="cube cube1">
@@ -37,6 +37,7 @@
           type="number"
           custom-style="background:#f6f6f6"
           maxlength="11"
+          placeholder-style="color:#999"
           center
           clearable
           placeholder="请输入收件人手机号"
@@ -50,6 +51,7 @@
           center
           custom-style="background:#f6f6f6"
           clearable
+          placeholder-style="color:#999"
           placeholder="姓名（选填）"
           border="{{ true }}"
         >
@@ -59,18 +61,23 @@
     </view>
     <view class="order-number">
       <!-- <input class="input" type="text" placeholder="物流单号（选填）" placeholder-class="placeholder"/> -->
-      <van-field
+      <view>
+        <van-field
           class="input"
           model:value="{{ order_numer }}"
           center
           custom-style="background:#f6f6f6"
           clearable
-          placeholder="物流单号（选填）"
+          placeholder-style="color:#999"
+          placeholder="物流单号"
           border="{{ true }}"
         >
-        
+
           <image class="scan" bindtap="scanOrder" slot='button' src="../../images/scan2.png"></image>
         </van-field>
+      </view>
+
+        <view class="tip"><text>*</text><text class="tip-word">需填写正确的订单号！</text></view>
     </view>
     <view class="order-remark">
       <!-- <input class="input" type="text" placeholder="备注（选填）" placeholder-class="placeholder"/> -->
@@ -81,6 +88,7 @@
           type="textarea"
           center
           autosize
+          placeholder-style="color:#999"
           placeholder="备注（选填）"
           border="{{ true }}"
         >
@@ -89,8 +97,12 @@
     <button wx:if="{{!nobox}}" class="submit-button" bindtap="open">开箱（准备存入）</button>
     <button wx:else class="submit-button" disabled="true" type="primary">当前柜暂无空闲格口，可前往其他柜存件。</button>
 
+    <view class="tip-word-bottom">
+    所有操作都在手机端完成！请确认箱门已关闭，并在手机端完成操作流程后再离开或进行下一单投递。
+    </view>
   </view>
-  
+
+
   <!-- 打开格子口弹框 -->
   <modal show="{{showModal}}" cancelText="{{modal.cancelText}}" confirmText="{{modal.confirmText}}" bindcancel="cancel" bindconfirm="confirm">
     <text slot="title">{{modal.title}}</text>

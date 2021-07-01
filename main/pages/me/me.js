@@ -33,7 +33,7 @@ const modals={
     title:'格口已打开',
     cancelText:'',
     confirmText:'已完成取走',
-    content:'请取走物品，并关闭格口后点击确认。'
+    content:'请取走物品，并关闭格口。'
   },
 }
 Page({
@@ -163,7 +163,8 @@ Page({
         const box_id = path.split('=')[1]
         if(box_id == this.data.box_id){
           const reso = await request.get('/openBoxButton',{
-            box_cell_id
+            box_cell_id,
+            type:5,
           })
 
           const {timestamp,signature} = reso.data

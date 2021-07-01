@@ -85,7 +85,7 @@
                     <text>单号：{{item.sn ? item.sn :'----'}}</text>
                   </span>
                   <span>备注：{{item.text?item.text:'----'}}</span>
-                  <span>取件人：{{item.get_one_action.type==0?"一键取件":item.get_one_action.type==1?"共享取件":item.get_one_action.type==2?"专属":item.get_one_action.type==3?"专属临一":item.get_one_action.type==4?"专属临二":item.get_one_action.type==5?"快递员打开":'密码取件（用户小程序取件 / 自己取出）'}}</span>
+                  <span>取件人：{{item.get_one_action.type==0?"一键取件":item.get_one_action.type==1?"共享取件":item.get_one_action.type==2?"专属":item.get_one_action.type==3?"专属临一":item.get_one_action.type==4?"专属临二":item.get_one_action.type==5?"快递员打开":item.get_one_action.type==6?'运维取出':'密码取件（用户小程序取件 / 自己取出）'}}</span>
               </view>
               <view class="button" style="width:90rpx"></view>
             </view>

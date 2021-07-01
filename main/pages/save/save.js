@@ -27,13 +27,13 @@ const modals={
     title:'格口已打开',
     cancelText:'放弃',
     confirmText:'我已存入',
-    content:'箱门关闭后3分钟内可放弃取出，超时'
+    content:'正常投寄后，请关闭箱⻔后2-3秒点击“我已存⼊”完成本次投寄。'
   },
   modal2:{
     title:'放弃本次存件？',
     cancelText:'确认放弃',
-    confirmText:'手滑了',
-    content:'点击确认放弃将打开箱门。'
+    confirmText:'返回',
+    content:'如果箱⻔已关，会再次打开。'
   },
   modal3:{
     title:'请取走物品并关箱',
@@ -76,11 +76,28 @@ Page({
         })
       }
     })
-    const {box_id} = options
+
+    const {box_id } = options
     this.setData({
       box_id
     })
+
+    //如果未登录则去个人中心
+    if(!wx.getStorageSync('isLogin')){
+      wx.switchTab({
+        url: '../me/me',
+      })
+      return
+    }
+
+    //未登录状态等待登录返回 再执行
+    app.loginReadyCallback = (res) =>{
+      this.getBoxInfo()
+      return
+    }
+
     this.getBoxInfo()
+    
   },
 
   /**
@@ -156,6 +173,7 @@ Page({
     })
   },
 
+  
   async confirm(){
 
     const {modal} = this.data
@@ -166,34 +184,48 @@ Page({
           title:'格口已打开',
           cancelText:'',
           confirmText:'',
-          content:'箱门关闭后3分钟内可放弃取出，超时'
+          content:''
         }
       })
       this.setData({
-        modal:{
-          title:'格口已打开',
-          cancelText:'放弃',
-          confirmText:'我已存入',
-          content:'箱门关闭后3分钟内可放弃取出，超时'
-        }
+        modal:modals.modal1
         
       })
       return
     }
 
     const {box_cell_id} = this.data
+    //获取箱子关闭状态
     await request.get('/lockStatus',{
       box_cell_id
     }).then(async res=>{
       const {code,mes} = res.data
       if(code == 10102){
         this.setData({
-          showModal:false
+          showModal:false,
+          phone:'',
+          name:'',
+          order_numer:'',
+          order_remark:''
         })
+        
         await this.getBoxInfo()
-        wx.navigateBack({
-          delta: 1,
-        })
+
+        if(modal.title == modals.modal3.title){
+          wx.switchTab({
+            url: '../index/index',
+          })
+          return
+        }
+
+        showToast('投递成功','success')
+        setTimeout(()=>{
+          wx.switchTab({
+            url: '../index/index',
+          })
+        },1500)
+        
+        
       }else{
         showToast(mes)
       }
@@ -209,16 +241,11 @@ Page({
           title:'放弃本次存件？',
           cancelText:'',
           confirmText:'',
-          content:'点击确认放弃将打开箱门。'
+          content:'如果箱⻔已关，会再次打开。'
         }
       })
       this.setData({
-        modal:{
-          title:'放弃本次存件？',
-          cancelText:'确认放弃',
-          confirmText:'手滑了',
-          content:'点击确认放弃将打开箱门。'
-        }
+        modal:modals.modal2
       })
       return
     }
@@ -252,6 +279,22 @@ Page({
 
   //开箱
   async open(){
+    const wx_userInfo = wx.getStorageSync('wx_userInfo')
+
+    if(!wx_userInfo){
+      await app.globalData.getUserProfile()
+    }
+
+    if(wx.getStorageSync('isLogin')){
+      await app.getUserInfo()
+    }
+
+    if(!wx.getStorageSync('isLogin')){
+      wx.navigateTo({
+        url: '../login-frame/login-frame',
+      })
+      return
+    }
 
     const {phone,name,order_numer:sn,order_remark:des,box_id,size} = this.data
 
@@ -268,6 +311,11 @@ Page({
         showToast('请输入正确的手机号')
         return
       } 
+    }
+
+    if(sn.trim() == ''){
+      showToast('请输入订单号')
+      return
     }
 
     await request.post('/kdy/save',{
